@@ -1,1 +1,0 @@
-<?php echo "Salir... cerrar sesion"; ?>
