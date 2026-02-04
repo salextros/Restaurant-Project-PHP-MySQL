@@ -1,0 +1,308 @@
+<?php
+include("admin/bd.php");
+
+$sentencia = $conexion->prepare("SELECT * FROM tbl_banners ORDER BY id DESC limit 1 ");
+$sentencia->execute();
+$lista_banners = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+$sentencia = $conexion->prepare("SELECT * FROM tbl_colaboradores ORDER BY id DESC limit 1 ");
+$sentencia->execute();
+$lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+  <!-- SECCION DE MENÚ NAVEGACIÓN -->
+
+    <nav id="inicio" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+        <a class="navbar-brand" href="#"> <i class="fas fa-utensils"></i> Restaurante La Sombra </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#menu">Menú del dia</a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chefs">Chefs</a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonio">Testimonio</a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#horario">Horarios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+
+  <!-- SECCION DEL BANNER -->
+
+    <section  class="container-fluid p-0">
+        <div class="banner-img" style="position:relative; background:url('images/slider-image1.jpg') center/cover no-repeat; height: 700px;">
+
+            <div class="banner-text" style="position: absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fff; text-align:center;">
+
+            <?php foreach($lista_banners as $banner) {
+            ?>    
+
+                <h1><?php echo $banner["titulo"];?></h1>
+                <p><?php echo $banner["descripcion"];?></p>
+                <a href="<?php echo $banner["link"];?>" class="btn btn-primary">Ver Menú</a>
+            <?php } ?>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="id" class="container mt-4 text-center">
+
+        <div class="jumbotron bg-dark text-white">
+
+            <br />
+            <h2>¡Bievenid@ al Restaurante La Sombra!</h2>
+            <p>Descubre una experiencia culinaria única</p>
+            <br />
+        </div>
+    </section>
+
+    <!-- SECCION DE CHEFST -->
+
+    <section id="chefs" class="container mt-4 text-center">
+        <h2>Nuestros Chefs</h2>
+        <div class="row">
+
+
+        <!-- ==================================================================================================================================== -->
+            <?php foreach($lista_colaboradores as $colaborador) { ?>
+
+            <div class="col-md-4"><!-- INICIO_1 -->
+                <div class="card">
+                    <img src="images/colaboradores/team-image3.jpg"
+                        class="card-img-top"
+                        alt="Chef 1" />
+
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $colaborador["foto"];?></h5>
+                        <p class="card-text"><?php echo $colaborador["titulo"];?></p>
+                        <div class="social-icons mt-3">
+                            <a href="#" class="text-dark m-2"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-dark m-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-dark m-2"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- FINAL_1 -->
+
+            <?php } ?>
+        <!-- ==================================================================================================================================== -->
+        </div>
+    </section>
+
+    <!-- SECCION DE TESTIMONIO -->
+
+    <section id="testimonio" class="bg-light py-5">
+        <div class="container">
+            <h2 class="tex-center mb-4">Testimonios </h2>
+
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card mb-4 w-100">
+                        <div class="card-body">
+                            <p class="card-text">Muy buena comida</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            - TIME Codeman
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 d-flex">
+                    <div class="card mb-4 w-100">
+                        <div class="card-body">
+                            <p class="card-text">Muy buena comida</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            - TIME Codeman
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION DEL MENU COMIDA -->
+
+    <section id="menu" class="container mt-4">
+        <h2 class="text-center">Menú (nuestra recomendación) </h2>
+        <br />
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col d-flex">
+                <div class="card">
+                    <img src="images/menu/menu-image1.jpg" alt="Tortillas de maiz con carne y frijoles negros" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> Tortillas de maiz con carne y frijoles </h5>
+                        <p class="card-text small"><strong>Ingredientes: </strong> Arroz, Frijoles</p>
+                        <p class="card-text"><strong> Precio: </strong> $3.99 </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col d-flex">
+                <div class="card">
+                    <img src="images/menu/menu-image2.jpg" alt="Tortillas de maiz con carne y frijoles negros" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> Tortillas de maiz con carne y frijoles </h5>
+                        <p class="card-text small"><strong>Ingredientes: </strong> Arroz, Frijoles</p>
+                        <p class="card-text"><strong> Precio: </strong> $3.99 </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col d-flex">
+                <div class="card">
+                    <img src="images/menu/menu-image3.jpg" alt="Tortillas de maiz con carne y frijoles negros" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> Tortillas de maiz con carne y frijoles </h5>
+                        <p class="card-text small"><strong>Ingredientes: </strong> Arroz, Frijoles</p>
+                        <p class="card-text"><strong> Precio: </strong> $3.99 </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col d-flex">
+                <div class="card">
+                    <img src="images/menu/menu-image4.jpg" alt="Tortillas de maiz con carne y frijoles negros" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> Tortillas de maiz con carne y frijoles </h5>
+                        <p class="card-text small"><strong>Ingredientes: </strong> Arroz, Frijoles</p>
+                        <p class="card-text"><strong> Precio: </strong> $3.99 </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+    <br />
+
+    <!-- SECCION DE CONTACTO -->
+
+    <section id="contacto" class="container mt-4">
+    
+    <h2>Contacto</h2>
+    <p>Si tienes alguna pregunta o deseas hacer una reserva, no dudes en contactarnos.</p>
+
+    <form action="?" method="post">
+
+    <div class="mb-3">
+        <label for="name">Nombre:</label><br>
+        <input type="text" class="form-control" name="nombre" placeholder="Escribe tu nombre..." required><br />
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Correo Electrónico:</label><br />
+      <input type="email" class="form-control" name="correo" placeholder="Escribe tu correo..." required><br />
+    </div>  
+
+    <div class="mb-3">
+      <label for="message">Mensaje:</label><br />
+      <textarea id="message" class="form-control"  name="mensaje" rows="6"  cols="50"></textarea><br />
+    </div>
+      <input type="submit" class="btn btn-primary" value="Enviar mensaje">
+
+    </form>
+
+    </section>
+    <br /><br />
+
+    <!-- SECCION DE HORARIO -->
+    <div id="horario" class="text-center bg-light p-4">
+        <h3 class="mb-4">Horario de atención</h3>
+
+        <div>
+            <p> <strong> Lunes a Viernes</strong> </p>
+            <p> <strong> 11:00 a.m - 10:00 p.m. </strong></p>
+        </div>
+
+           <div>
+            <p> <strong> Sábado</strong> </p>
+            <p> <strong> 12:00 p.m - 5:00 p.m. </strong></p>
+        </div>
+
+        <div>
+            <p> <strong>Domingo</strong> </p>
+            <p> <strong> 7:00 a.m - 2:00 p.m. </strong></p>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <footer class="bg-dark text-white text-center py-3">
+        <!-- place footer here -->
+
+        <p> &copy; 2026 Restaurante La Sombra, todos los derechos reservados.</p>
+
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
